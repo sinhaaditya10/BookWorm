@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sample Page</title>
+<style>
+#user {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+text-align:center;
+}
+
+#user td, #user th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#user tr:nth-child(even){background-color: #f2f2f2;}
+
+#user tr:hover {background-color: #ddd;}
+
+#user th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #32CD32;
+  color: white;
+}
+</style>
+</head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="welcome.html">BookWorm</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="sample.html">Store</a></li>
+      <li class='active'><a href="orderList.html">All Issues</a></li>
+      <li><a href="user.html">Users</a></li>
+    </ul>
+    
+  </div>
+</nav>
+<title>HRC Application</title>
+</head>
+<body>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+<script>
+  // Your web app's Firebase configuration
+
+  var firebaseConfig = {
+    apiKey: "AIzaSyAMGOKI64vmRAoansZmvcsK9_RYFpD8k7k",
+    authDomain: "bookworm-1cc60.firebaseapp.com",
+    databaseURL: "https://bookworm-1cc60.firebaseio.com",
+    projectId: "bookworm-1cc60",
+    storageBucket: "bookworm-1cc60.appspot.com",
+    messagingSenderId: "324581440995",
+    appId: "1:324581440995:web:a6cdd50596e31fdb"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  database= firebase.database();
+  database.ref('Order List').once('value').then(function(snapshot) {
+  //var prospectId = snapshot.key ;
+
+  snapshot.forEach(function(snapshot1) {
+   // console.log(snapshot1.key); 
+    snapshot.forEach(function(snapshot2) {
+	var demo='';
+	 snapshot2.forEach(function(snapshot3) {
+       //console.log(snapshot3.key);
+		demo=demo+snapshot3.key+',';
+      });
+	  if(snapshot2.getKey()==snapshot1.key)
+	  {
+		table(snapshot1.key,demo);
+	  }
+  });
+});
+});
+
+ /* var ref= database.ref('Order List');
+  ref.on('value',gotData,errData);
+
+function gotData(data)
+{
+  database.ref(data).once('value').then(function(snapshot) {
+  var prospectId = snapshot.key ;
+
+  snapshot.forEach(function(snapshot1) {
+    console.log(snapshot1.key); // e.g. "http://..."
+    /*snapshot.forEach(function(snapshot2) {
+      console.log(childSnapshot.key); // e.g. "20170116"
+      childSnapshot.forEach(function(snapshot3) {
+        console.log(grandchildSnapshot.key); // e.g. "-Kb9...gkE"
+        console.log(grandchildSnapshot.val().districtId); // "pne"
+      });
+    });
+  });
+}); 
+}*/
+function table(roll,issue) 
+{
+ var tab=document.getElementById('user');
+ var row=tab.insertRow(-1);
+ var c1=row.insertCell(0);
+ var c2=row.insertCell(1);
+
+ c1.innerHTML=roll;
+ c2.innerHTML=issue;
+ 
+ 
+}
+
+function errData(err)
+{
+console.log('Error!');
+console.log(err);
+}
+
+</script>
+
+<table id='user' border="black" border-collapse="collapse">
+  <tr>
+	<th>Roll</th>
+    <th>Issue Number</th>
+  </tr>
+
+</table>
+
+</body>
+</html>

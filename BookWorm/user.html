@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>BookWorm</title>
+<style>
+#user {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+text-align:center;
+}
+
+#user td, #user th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#user tr:nth-child(even){background-color: #f2f2f2;}
+
+#user tr:hover {background-color: #ddd;}
+
+#user th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #32CD32;
+  color: white;
+}
+</style>
+</head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="welcome.html">BookWorm</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="sample.html">Store</a></li>
+      <li><a href="orderList.html">All Issues</a></li>
+      <li class='active'><a href="user.html">Users</a></li>
+    </ul>
+    
+  </div>
+</nav>
+<title>HRC Application</title>
+</head>
+<body>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+<script>
+  // Your web app's Firebase configuration
+
+  var firebaseConfig = {
+    apiKey: "AIzaSyAMGOKI64vmRAoansZmvcsK9_RYFpD8k7k",
+    authDomain: "bookworm-1cc60.firebaseapp.com",
+    databaseURL: "https://bookworm-1cc60.firebaseio.com",
+    projectId: "bookworm-1cc60",
+    storageBucket: "bookworm-1cc60.appspot.com",
+    messagingSenderId: "324581440995",
+    appId: "1:324581440995:web:a6cdd50596e31fdb"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  database= firebase.database();
+  var ref= database.ref('Users');
+  ref.on('value',gotData,errData);
+
+function gotData(data)
+{
+//console.log(data.val());
+var user=data.val();
+var keys=Object.keys(user);
+console.log(keys);
+for (var i=0;i<keys.length;i++)
+{
+   var k=keys[i];
+   var co=user[k].currentOrder;
+   var email=user[k].email;
+   var fine=user[k].fine;
+   var phone=user[k].phone;
+   var token=user[k].token;
+   var name=user[k].name;
+   //console.log(author,des,isbn,name,quan);
+   table(co,email,fine,phone,name);
+}
+ 
+}
+function table(co,email,fine,phone,name) 
+{
+ var tab=document.getElementById('user');
+ var row=tab.insertRow(-1);
+ var c1=row.insertCell(0);
+ var c2=row.insertCell(1);
+ var c3=row.insertCell(2);
+ var c4=row.insertCell(3);
+ var c5=row.insertCell(4);
+ var c6=row.insertCell(5); 
+ 
+ var roll =email.substring(0,7); 
+ c1.innerHTML=name;
+ c2.innerHTML=roll;
+ c3.innerHTML=co;
+ c4.innerHTML=email;
+ c5.innerHTML=phone;
+ c6.innerHTML=fine;
+}
+
+function errData(err)
+{
+console.log('Error!');
+console.log(err);
+}
+
+
+</script>
+<table id='user' border="black" border-collapse="collapse">
+  <tr>
+	<th>Name</th>
+    <th>Roll No.</th>
+    <th>Current Issue Number</th>
+    <th>Email</th>
+	<th>Phone</th>
+	<th>Fine</th>
+  </tr>
+  <tr>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardLayout"
+    android:layout_margin="5dp"
+    android:layout_width="match_parent"
+    android:minHeight="50dp"
+    android:layout_height="wrap_content">
+
+    <android.widget.RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/r1"
+        android:padding="3dp"
+        android:background="#F6FDF1"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/orderNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="8dp"
+            android:text="Issue Number : "
+            android:textColor="#0029FF"
+            android:textStyle="bold"
+            android:textSize="18sp" />
+        <TextView
+            android:id="@+id/status"
+            android:layout_below="@+id/orderNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="8dp"
+            android:text="Status : On Hold"
+            android:textColor="#1AFF00"
+            android:textStyle="bold"
+            android:textSize="18sp" />
+        <ListView
+            android:id="@+id/bookList"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_below="@+id/status"
+            android:layout_height="wrap_content" />
+
+    </android.widget.RelativeLayout>
+
+</android.support.v7.widget.CardView>
